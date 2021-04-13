@@ -498,12 +498,6 @@ p {
 .intro-banner{
     position: fixed;
     text-align: center;
-  background: url(../img/headshot.jpg);
-  width: 400px;
-  height: 350px;
-  background-size: 100% auto;
-  background-repeat: no-repeat;
-  margin: 0 auto;
 }
 
 div.bg-img {
@@ -515,20 +509,21 @@ div.bg-img {
 }
 
 .headshot{
-  //background: url(../img/headshot.jpg);
+  background: url(../img/headshot.jpg);
+
 }
 
 .momma{
-  background: url(../img/momma.jpeg);
+  background: url(../img/momma.jpg);
   width: 350px !important;
 }
 
 .pilot{
-  background: url(../img/pilots.jpeg);
+  background: url(../img/pilots.jpg);
 }
 
 .culture{
-  background: url(../img/culture.jpeg);
+  background: url(../img/culture.jpg);
 }
 
 .mt-2 {
