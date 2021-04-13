@@ -5,6 +5,8 @@ $font-size: 16px !default;
 $font-family-1: 'Montserrat', sans-serif !default;
 //$font-family-2: 'Oswald', serif !default;
 
+$primary: #f9ba32;
+$xwhite: #f8f1e5;
 
 //  Headlines
 // ################
@@ -30,6 +32,7 @@ a,a:link,a:visited {
     align-items: center;
     flex-direction: column;
   min-height: 100%;
+  padding: 0px 10px;
 }
 
 html {
@@ -252,11 +255,14 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
-  background-color: #121212;
+  //height: 100vh;
+  //background-color: #121212;
+  background-color: #000;
   z-index: 99;
-  overflow: hidden;
+  //overflow: hidden;
   opacity: 0;
+  padding: 100px 0px;
+  text-align: center;
   &.reveal-about {
     animation: reveal-about 1.5s cubic-bezier(0.550, 0.055, 0.675, 0.190) forwards;
   }
@@ -269,8 +275,11 @@ body {
     align-items: center;
   }
   h1 {
-    color: #fff;
-    font-size: calc(1rem + .85vw);
+    color: $xwhite;
+    font-size: calc(1.2rem + .85vw);
+  }
+  p {
+    color: $xwhite;
   }
 }
 
@@ -435,9 +444,12 @@ body {
     z-index: 100;
     overflow: hidden;
     h1 {
+        color: $primary;
       font-size: 1rem;
+      margin: 0;
     }
     a,a:link,a:visited {
+        color: $primary;
       font-family: $font-family-1;
       font-weight: bold;
     }
@@ -448,10 +460,77 @@ body {
     }
 }
 
+@keyframes pulse {
+  0% {
+      transform: scale(1);
+  }
+  50% {
+      transform: scale(1.2);
+  }
+}
+
 .nav--left {
   left: 3rem;
 }
 
 .nav--right {
   right: 3rem;
+  animation: pulse 5s ease 0s infinite;
+}
+
+.section {
+    padding: 0px 50px;
+}
+
+
+
+p {
+    font-family: $font-family-1;
+}
+
+
+
+.description {
+  font-size: 14px;
+  color: #9e9e9e;
+}
+
+.intro-banner{
+    position: fixed;
+    text-align: center;
+  background: url(../img/headshot.jpg);
+  width: 400px;
+  height: 350px;
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  margin: 0 auto;
+}
+
+div.bg-img {
+  width: 400px;
+  height: 350px;
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  margin: 0 auto;
+}
+
+.headshot{
+  //background: url(../img/headshot.jpg);
+}
+
+.momma{
+  background: url(../img/momma.jpeg);
+  width: 350px !important;
+}
+
+.pilot{
+  background: url(../img/pilots.jpeg);
+}
+
+.culture{
+  background: url(../img/culture.jpeg);
+}
+
+.mt-2 {
+    margin-top: 1rem;
 }

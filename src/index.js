@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import Message from './js/Message'
 import NavBar from './js/NavBar'
 import './js/revealer.js'
-import './js/anime.js'
+//import './js/anime.js'
 
 import './css/style.css'
 import './scss/revealer.scss'
