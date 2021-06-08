@@ -1,77 +1,64 @@
-# Okta React + Okta Hosted Login Example
+# Basic CRUD App with Node + React
 
-This example shows you how to use the [Okta React Library][] and [React Router](https://github.com/ReactTraining/react-router) to login a user to a React application.  The login is achieved through the [PKCE Flow][], where the user is redirected to the Okta-Hosted login page.  After the user authenticates they are redirected back to the application with an ID token and access token.
+This example app shows how to create a Node.js API and display its data with a React UI. To follow along step-by-step, [check out the blog post](https://developer.okta.com/blog/2018/07/10/build-a-basic-crud-app-with-node-and-react).
 
-This example is built with [Create React App][].
+This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
-## Prerequisites
+**Prerequisites**: [Node.js](https://nodejs.org/en/), [Yarn](https://yarnpkg.com/lang/en/), and [SQLite](https://www.sqlite.org/index.html).
 
-Before running this sample, you will need the following:
+## Getting Started
 
-* An Okta Developer Account, you can sign up for one at https://developer.okta.com/signup/.
-* An Okta Application, configured for Single-Page App (SPA) mode. This is done from the Okta Developer Console, you can see the [OIDC SPA Setup Instructions][].  When following the wizard, use the default properties.  They are are designed to work with our sample applications.
-
-## Running This Example
-
-To run this application, you first need to clone this repo:
+To install this example application, run the following commands:
 
 ```bash
-git clone https://github.com/okta/samples-js-react.git
+git clone https://github.com/oktadeveloper/okta-react-node-example.git
+cd okta-react-node-example
+yarn
 ```
 
-Then install dependencies:
+This will get a copy of the project install locally. You will need to set up some environment variables before the app will run properly.
+
+Before you begin, you'll need a free Okta developer account. Install the [Okta CLI](https://cli.okta.com/) and run `okta register` to sign up for a new account. If you already have an account, run `okta login`.
+
+Then, run `okta apps create`. Select the default app name, or change it as you see fit. Choose **Single-Page App** and press **Enter**.
+
+Change the Redirect URI to `http://localhost:3000/login/callback` and accept the default Logout Redirect URI of `http://localhost:3000`.
+
+The Okta CLI will create an OIDC Single-Page App in your Okta Org. It will add the redirect URIs you specified and grant access to the Everyone group. It will also add a trusted origin for `http://localhost:3000`. You will see output like the following when it's finished:
+
+```
+Okta application configuration:
+Issuer:    https://dev-133337.okta.com/oauth2/default
+Client ID: 0oab8eb55Kb9jdMIr5d6
+```
+
+NOTE: You can also use the Okta Admin Console to create your app. See [Create a React App](https://developer.okta.com/docs/guides/sign-into-spa/react/create-okta-application/) for more information.
+
+Now create a file called `.env.local` in the project root and add the following variables, replacing the values with your own from the previous steps. Your Okta domain is the first part of your issuer, before `/oauth2/default`.
+
+**.env.local**
+```bash
+REACT_APP_OKTA_CLIENT_ID={yourClientId}
+REACT_APP_OKTA_ORG_URL={yourOktaOrgUrl}
+```
+
+Now you can run both the Node API server and the React frontend with the same command:
 
 ```bash
-npm install
-```
-Enter into okta-hosted-login directory:
-```bash
-cd samples-js-react/okta-hosted-login
+yarn start
 ```
 
-Now you need to gather the following information from the Okta Developer Console:
+## Links
 
-- **Client Id** - The client ID of the SPA application that you created earlier. This can be found on the "General" tab of an application, or the list of applications.  This identifies the application that tokens will be minted for.
-- **Issuer** - This is the URL of the authorization server that will perform authentication.  All Developer Accounts have a "default" authorization server.  The issuer is a combination of your Org URL (found in the upper right of the console home page) and `/oauth2/default`. For example, `https://dev-1234.oktapreview.com/oauth2/default`.
+This example uses the following libraries provided by Okta:
 
-These values must exist as environment variables. They can be exported in the shell, or saved in a file named `testenv`, at the root of this repository. (This is the parent directory, relative to this README) See [dotenv](https://www.npmjs.com/package/dotenv) for more details on this file format.
+* [Okta JWT Verifier](https://github.com/okta/okta-oidc-js/tree/master/packages/jwt-verifier)
+* [Okta React SDK](https://github.com/okta/okta-react)
 
-```ini
-ISSUER=https://yourOktaDomain.com/oauth2/default
-CLIENT_ID=123xxxxx123
-```
+## Help
 
-With variables set, start the app server:
+Please [raise an issue](https://github.com/oktadeveloper/okta-react-node-example/issues) if you find a problem with the example application, or visit our [Okta Developer Forums](https://devforum.okta.com/).
 
-```
-npm start
-```
+## License
 
-You could also start the app server from root directory like:
-```
-npm run okta-hosted-login-server
-```
-
-Now navigate to http://localhost:8080 in your browser.
-
-If you see a home page that prompts you to login, then things are working!  Clicking the **Log in** button will redirect you to the Okta hosted sign-in page.
-
-You can login with the same account that you created when signing up for your Developer Org, or you can use a known username and password from your Okta Directory.
-
-**Note:** If you are currently using your Developer Console, you already have a Single Sign-On (SSO) session for your Org.  You will be automatically logged into your application as the same user that is using the Developer Console.  You may want to use an incognito tab to test the flow from a blank slate.
-
-## Integrating The Resource Server
-
-If you were able to successfully login in the previous section you can continue with the resource server example.  Please download and run one of these sample applications in another terminal:
-
-* [Node/Express Resource Server Example](https://github.com/okta/samples-nodejs-express-4/tree/master/resource-server)
-* [Java/Spring MVC Resource Server Example](https://github.com/okta/samples-java-spring/tree/master/resource-server)
-* [ASP.NET](https://github.com/okta/samples-aspnet/tree/master/resource-server) and [ASP.NET Core](https://github.com/okta/samples-aspnetcore/tree/master/samples-aspnetcore-3x/resource-server) Resource Server Examples
-
-Once you have the resource server running (it will run on port 8000) you can visit the `/messages` page within the React application to see the authentication flow.  The React application will use its stored access token to authenticate itself with the resource server, you will see this as the `Authorization: Bearer <access_token>` header on the request if you inspect the network traffic in the browser.
-
-[Create React App]: https://create-react-app.dev
-[Okta React Library]: https://github.com/okta/okta-react
-[OIDC SPA Setup Instructions]: https://developer.okta.com/docs/guides/sign-into-spa/react/before-you-begin
-[PKCE Flow]: https://developer.okta.com/docs/guides/implement-auth-code-pkce
-[Okta Sign In Widget]: https://github.com/okta/okta-signin-widget
+Apache 2.0, see [LICENSE](LICENSE).
