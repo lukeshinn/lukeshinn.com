@@ -15,27 +15,37 @@
       --faint: #6b7385;
       --line: rgba(255, 255, 255, 0.08);
       --accent: #7c9cff;
+      --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
     }
 
     * {
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    /* Hero */
+    .hero {
       min-height: 100vh;
       min-height: 100svh;
       display: grid;
       place-items: center;
       padding: clamp(24px, 5vw, 64px);
+      overflow-x: clip;
       background:
         radial-gradient(60% 50% at 12% 8%, rgba(124, 156, 255, 0.16), transparent 62%),
-        radial-gradient(45% 45% at 92% 88%, rgba(94, 234, 212, 0.09), transparent 60%),
-        var(--bg);
-      color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
+        radial-gradient(45% 45% at 92% 88%, rgba(94, 234, 212, 0.09), transparent 60%);
     }
 
     .page {
@@ -105,7 +115,7 @@
       gap: 12px;
       margin: 0 0 clamp(20px, 3vw, 28px);
       color: var(--muted);
-      font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+      font-family: var(--mono);
       font-size: 0.72rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
@@ -126,7 +136,7 @@
       letter-spacing: -0.045em;
     }
 
-    p {
+    .lede {
       max-width: 46ch;
       margin: 0 0 clamp(28px, 4vw, 36px);
       color: var(--muted);
@@ -164,19 +174,181 @@
       }
     }
 
-    .meta {
+    .intro-foot {
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
-      gap: 12px;
+      gap: 16px 20px;
       margin-top: clamp(32px, 5vw, 48px);
       color: var(--faint);
-      font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+      font-family: var(--mono);
       font-size: 0.72rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
     }
 
+    .meta {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+
     .meta::before {
+      content: "";
+      width: 24px;
+      height: 1px;
+      background: var(--line);
+    }
+
+    .jump {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 2px 0;
+      border-bottom: 1px solid transparent;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .jump:hover {
+      color: var(--text);
+      border-bottom-color: rgba(255, 255, 255, 0.25);
+    }
+
+    .jump:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 4px;
+      border-radius: 2px;
+    }
+
+    /* Writing */
+    .writing {
+      border-top: 1px solid var(--line);
+      padding: clamp(56px, 9vw, 104px) clamp(24px, 5vw, 64px) clamp(72px, 10vw, 128px);
+      scroll-margin-top: 24px;
+    }
+
+    .writing-inner {
+      width: 100%;
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: clamp(32px, 5vw, 48px);
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-title {
+      margin: 0;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+
+    .section-note {
+      color: var(--faint);
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .post {
+      padding: clamp(26px, 5vw, 56px);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.012));
+      box-shadow: 0 40px 80px -56px rgba(0, 0, 0, 0.9);
+    }
+
+    .post-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 18px;
+      color: var(--faint);
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .post-meta .dot {
+      color: rgba(255, 255, 255, 0.2);
+    }
+
+    .post-title {
+      margin: 0 0 16px;
+      font-size: clamp(1.8rem, 3.6vw, 2.55rem);
+      font-weight: 600;
+      line-height: 1.12;
+      letter-spacing: -0.035em;
+    }
+
+    .post-dek {
+      max-width: 52ch;
+      margin: 0 0 clamp(28px, 4vw, 40px);
+      color: var(--muted);
+      font-size: clamp(1rem, 1.5vw, 1.125rem);
+      line-height: 1.65;
+    }
+
+    .prose {
+      max-width: 66ch;
+      color: #c3cbd8;
+      font-size: clamp(1rem, 1.2vw, 1.0625rem);
+      line-height: 1.8;
+    }
+
+    .prose p {
+      margin: 0 0 1.35em;
+    }
+
+    .prose p:last-child {
+      margin-bottom: 0;
+    }
+
+    .prose > p:first-of-type {
+      color: #dde3ed;
+      font-size: 1.06em;
+    }
+
+    .prose h3 {
+      margin: 2.1em 0 0.9em;
+      color: var(--text);
+      font-family: var(--mono);
+      font-size: 0.74rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .post-foot {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: clamp(30px, 4vw, 44px);
+      padding-top: 22px;
+      border-top: 1px solid var(--line);
+      color: var(--faint);
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .post-foot::before {
       content: "";
       width: 24px;
       height: 1px;
@@ -187,7 +359,6 @@
       .page {
         grid-template-columns: 1fr;
         gap: clamp(36px, 9vw, 48px);
-        overflow-x: clip;
       }
 
       .portrait {
@@ -203,16 +374,24 @@
         display: none;
       }
 
-      p {
+      .lede {
         max-width: 42ch;
       }
 
-      .meta {
-        margin-top: 32px;
+      .intro-foot {
+        justify-content: center;
+      }
+
+      .post {
+        border-radius: 22px;
       }
     }
 
     @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
       .status::before {
         animation: none;
       }
@@ -220,25 +399,71 @@
   </style>
 </head>
 <body>
-  <main class="page">
-    <figure class="portrait">
-      <img
-        src="headshot-color-1200.jpg"
-        srcset="headshot-color-1200.jpg 1200w, headshot-color.jpg 3712w"
-        sizes="(max-width: 820px) 300px, 420px"
-        alt="Portrait of Luke Shinn"
-        width="3712"
-        height="3712"
-        decoding="async"
-        fetchpriority="high">
-    </figure>
+  <main>
+    <section class="hero">
+      <div class="page">
+        <figure class="portrait">
+          <img
+            src="headshot-color-1200.jpg"
+            srcset="headshot-color-1200.jpg 1200w, headshot-color.jpg 3712w"
+            sizes="(max-width: 820px) 300px, 420px"
+            alt="Portrait of Luke Shinn"
+            width="3712"
+            height="3712"
+            decoding="async"
+            fetchpriority="high">
+        </figure>
 
-    <section class="intro">
-      <p class="eyebrow">Software Engineer · Freelancer</p>
-      <h1>Hello, world. 👋</h1>
-      <p>I'm Luke Shinn. Welcome to my corner of the internet.</p>
-      <span class="status">More coming soon.</span>
-      <footer class="meta">© 2026 Luke Shinn</footer>
+        <div class="intro">
+          <p class="eyebrow">Software Engineer · Freelancer</p>
+          <h1>Hello, world. 👋</h1>
+          <p class="lede">I'm Luke Shinn. Welcome to my corner of the internet.</p>
+          <span class="status">More coming soon.</span>
+          <div class="intro-foot">
+            <footer class="meta">© 2026 Luke Shinn</footer>
+            <a class="jump" href="#writing">Writing <span aria-hidden="true">↓</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="writing" id="writing" aria-labelledby="writing-title">
+      <div class="writing-inner">
+        <div class="section-head">
+          <p class="section-title" id="writing-title">Writing</p>
+          <p class="section-note">Latest post</p>
+        </div>
+
+        <article class="post">
+          <header>
+            <p class="post-meta">
+              <time datetime="2026-10-26">October 26, 2026</time>
+              <span class="dot" aria-hidden="true">·</span>
+              <span>2 min read</span>
+              <span class="dot" aria-hidden="true">·</span>
+              <span>QA</span>
+            </p>
+            <h2 class="post-title">The QA bottleneck</h2>
+            <p class="post-dek">An experiment in shifting testing left when there is one QA and many developers.</p>
+          </header>
+
+          <div class="prose">
+            <p>If you’re the QA at a company that’s recently adopted Claude, you’ve likely heard the term “QA is becoming a bottleneck.” I’ve felt this burden recently, and I’ve wondered how I will ever overcome this. We ran an experiment to attempt to solve this problem.</p>
+            <p>My team consists of many developers with a sole QA. I’m of the opinion developers will need to own more of the testing than traditional roles. So we’ve shifted some of that responsibility. Here’s how it looks in practice.</p>
+            <p>First, we invested in testing tools developers could use on their own: a test plan generator and an integration testing framework that was reliable in testing components in isolation.</p>
+            <p>Next, our team defined four testing levels (T1–T4). The definitions explain what level of testing is needed before we can click that big green merge button.</p>
+
+            <h3>Where this works well</h3>
+
+            <p>The refinement of a ticket includes setting a testing level. In Kanban we have better predictability into a ticket’s cycle time. Let’s say the QA is on vacation or needs to prioritize a chapter initiative — like testing a major version upgrade unrelated to the team. This effectively reduces testing capacity to zero. In this scenario, developers will only choose to work on testing levels 1–2: tasks they can get across the line on their own. Predictability is the key here.</p>
+            <p>Another example is when QA is at capacity testing a major feature or release. Again, devs only commit to lower testing level tickets. They can dev, test and ship all on their own, backed by the reliability of the testing tools.</p>
+            <p>On the other hand, if there are multiple high testing effort tickets in progress, the squad can understand when swarming is appropriate. Again, we can predict the bottlenecks and plan accordingly.</p>
+            <p>Of course, the perfect solution to the QA bottleneck is shifting testing left. If the scale of your work is large, it will take time to build tools to reliably automate 100% of testing needs. These testing level definitions have been a good stopgap in the meantime.</p>
+          </div>
+
+          <footer class="post-foot">Luke Shinn</footer>
+        </article>
+      </div>
     </section>
   </main>
 </body>
